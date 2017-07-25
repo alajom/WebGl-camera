@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<title>SER331: Camera Movement</title>
+
+<script id="sphereVertex" type="x-shader/x-vertex">
+attribute vec4 vPosition;
+attribute vec4 vColor;
+varying vec4 fColor;
+uniform mat4 modelViewMatrix;
+uniform mat4 projectionMatrix;
+uniform vec3 theta;
+
+mat4 scale = mat4(0.25, 0, 0, 0,
+				  0, 0.25, 0, 0,
+				  0, 0, 0.25, 0,
+				  0, 0, 0, 1);
+
+void main() {
+    //gl_Position =  vPosition * scale;
+	gl_Position =  projectionMatrix * modelViewMatrix * vPosition * scale;
+	fColor = vColor;
+}
+
+</script>
+
+<script id="cubeVertex" type=x-shader/x-vertex">
+attribute vec4 vPosition;
+varying vec4 fColor;
+uniform mat4 modelViewMatrix;
+uniform mat4 projectionMatrix;
+
+mat4 scale = mat4(.75, 0, 0, 0,
+				  0, .75, 0, 0,
+				  0, 0, .75, 0,
+				  0, 0, 0, 1);
+
+void main() {
+    //gl_Position =  vPosition * scale;
+	gl_Position =  projectionMatrix * modelViewMatrix * vPosition * scale;
+}
+</script>
+
+<script id="cubeVertexInner" type=x-shader/x-vertex">
+attribute vec4 vPosition;
+varying vec4 fColor;
+uniform mat4 modelViewMatrix;
+uniform mat4 projectionMatrix;
+
+mat4 scale = mat4(.749, 0, 0, 0,
+				  0, .749, 0, 0,
+				  0, 0, .749, 0,
+				  0, 0, 0, 1);
+
+void main() {
+    //gl_Position =  vPosition * scale;
+	gl_Position =  projectionMatrix * modelViewMatrix * vPosition * scale;
+}
+</script>
+
+
+<script id="sphereColor" type="x-shader/x-fragment">
+precision mediump float;
+varying vec4 fColor;
+
+void main() {
+
+    gl_FragColor = fColor; // blue
+	
+}
+</script>
+
+<script id="cubeColor" type="x-shader/x-fragment">
+precision mediump float;
+uniform vec4 fColor;
+
+void main() {
+
+    gl_FragColor = fColor; // red
+	
+}
+</script>
+
+<script id="cubeColorInner" type="x-shader/x-fragment">
+precision mediump float;
+uniform vec4 fColor;
+
+void main() {
+
+    gl_FragColor = fColor; //vec4(1,1,0,1); // yellow
+	
+}
+</script>
+
+
+
+<script type="text/javascript" src="webgl-utils.js"></script>
+<script type="text/javascript" src="initShaders.js"></script>
+<script type="text/javascript" src="MV.js"></script>
+<script type="text/javascript" src="assign3.js"></script>
+
+<body>
+
+<canvas id="gl-canvas" width="600" height="600">
+Oops... Your browser doesn't support the HTML5 canvas element.
+</canvas>
+</br>
+<div>
+
+</div>
+</body>
+</html>
